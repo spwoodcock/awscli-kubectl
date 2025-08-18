@@ -16,6 +16,12 @@ RUN apt-get update --quiet \
     && unzip awscliv2.zip \
     && ./aws/install \
     && rm -rf awscliv2.zip ./aws \
+    # Helm
+    && curl -L https://get.helm.sh/helm-v3.18.5-linux-amd64.tar.gz -o helm.tar.gz \
+    && tar -zxvf helm.tar.gz \
+    && chmod +x linux-amd64/helm \
+    && mv linux-amd64/helm /usr/local/bin/ \
+    && rm -rf helm.tar.gz linux-amd64 \
     # Kubie
     && curl -L https://github.com/sbstp/kubie/releases/download/v0.26.0/kubie-linux-amd64 -o kubie \
     && chmod +x kubie \
