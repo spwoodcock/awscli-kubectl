@@ -2,11 +2,15 @@ FROM bitnami/kubectl:1.33-debian-12 AS kubectl
 
 
 FROM docker.io/debian:bookworm-slim
+# `less` is needed by some aws commands
+# `jq' is generally useful for parsing json responses
 RUN apt-get update --quiet \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --quiet --no-install-recommends \
         "curl" \
         "unzip" \
+        "less" \
+        "jq" \
         "ca-certificates" \
         "fish" \
     && rm -rf /var/lib/apt/lists/* \
