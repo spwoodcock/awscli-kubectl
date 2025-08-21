@@ -1,7 +1,7 @@
 FROM bitnami/kubectl:1.33-debian-12 AS kubectl
 
 
-FROM docker.io/debian:bookworm-slim
+FROM docker.io/debian:trixie-slim
 # `less` is needed by some aws commands
 # `jq' is generally useful for parsing json responses
 RUN apt-get update --quiet \
@@ -30,6 +30,12 @@ RUN apt-get update --quiet \
     && curl -L https://github.com/sbstp/kubie/releases/download/v0.26.0/kubie-linux-amd64 -o kubie \
     && chmod +x kubie \
     && mv kubie /usr/local/bin/ \
+    # Kubeseal (sealed secrets)
+    && curl -L https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.31.0/kubeseal-0.31.0-linux-amd64.tar.gz -o kubeseal.tar.gz \
+    && tar -xvzf kubeseal.tar.gz kubeseal \
+    && chmod +x kubeseal \
+    && mv kubeseal /usr/local/bin/ \
+    && rm kubeseal.tar.gz \
     # Shell aliases
     && mkdir -p /root/.config/fish \
     && cat <<'EOF' >> /root/.config/fish/config.fish
