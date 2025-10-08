@@ -1,4 +1,4 @@
-FROM bitnami/kubectl:1.33-debian-12 AS kubectl
+FROM bitnami/kubectl:latest AS kubectl
 
 
 FROM docker.io/debian:trixie-slim
@@ -36,6 +36,8 @@ RUN apt-get update --quiet \
     && chmod +x kubeseal \
     && mv kubeseal /usr/local/bin/ \
     && rm kubeseal.tar.gz \
+    # TalosCTL
+    && curl -sL https://talos.dev/install | sh \
     # Shell aliases
     && mkdir -p /root/.config/fish \
     && cat <<'EOF' >> /root/.config/fish/config.fish
