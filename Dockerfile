@@ -50,6 +50,12 @@ function copy-secret
     | jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid"])' \
     | kubectl apply -n $argv[2] -f -
 end
+
+# --- Optionally source user-provided Fish config ---
+if test -f /opt/fish/user-config.fish
+    echo "→ Loading user Fish config from /opt/fish/user-config.fish"
+    source /opt/fish/user-config.fish
+end
 EOF
 
 # Kubectl

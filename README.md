@@ -16,7 +16,17 @@ docker build . -t ghcr.io/spwoodcock/awscli-kubectl:latest
 
 ```bash
 # Set alias, place in ~/.bashrc if you prefer
-alias aws-shell='docker run --rm -it --network=host -v $HOME:/root --workdir /root ghcr.io/spwoodcock/awscli-kubectl:latest'
+alias aws-shell='docker run --rm -it --name aws-cli \
+  -v $HOME:$HOME \
+  -v $HOME/.aws:/root/.aws \
+  -v $HOME/.kube:/root/.kube \
+  -v $HOME/.local/share/fish/fish_history:/root/.local/share/fish/fish_history \
+  -v $HOME/.config/fish/config.fish:/opt/fish/user-config.fish:ro \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  --workdir $HOME \
+  --network host \
+  ghcr.io/spwoodcock/awscli-kubectl:latest'
 
+# Source the aliases
 aws-shell
 ```
