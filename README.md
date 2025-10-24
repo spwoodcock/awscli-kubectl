@@ -1,10 +1,15 @@
 # awscli-kubectl
 
-Simple image for connecting to an EKS Kubernetes cluster:
+Simple image containing Kubernetes / infra utilities, primarily for
+connecting to AWS-based services.
+
 - Fish shell + aliases
 - AWS CLI
 - Helm
 - Kubie
+- Kubeseal
+- Talosctl
+- OpenTofu
 
 ## Building
 
@@ -27,6 +32,6 @@ alias aws-shell='docker run --rm -it --name aws-cli \
   --network host \
   ghcr.io/spwoodcock/awscli-kubectl:latest'
 
-# Source the aliases
+# Source the alias (will be loaded at startup automatically in ~/.bashrc)
 aws-shell
 ```
