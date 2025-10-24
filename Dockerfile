@@ -44,6 +44,13 @@ RUN apt-get update --quiet \
     && chmod +x install-opentofu.sh \
     && ./install-opentofu.sh --install-method deb \
     && rm -f install-opentofu.sh \
+    # Velero + Restic
+    && VELERO_VERSION=1.17.0 \
+    && curl -L "https://github.com/vmware-tanzu/velero/releases/download/v${VELERO_VERSION}/velero-v${VELERO_VERSION}-linux-amd64.tar.gz" -o velero.tar.gz \
+    && tar -zxvf velero.tar.gz \
+    && chmod +x "velero-v${VELERO_VERSION}-linux-amd64/velero" \
+    && mv "velero-v${VELERO_VERSION}-linux-amd64/velero" /usr/local/bin/ \
+    && rm -rf velero.tar.gz "velero-v${VELERO_VERSION}-linux-amd64" \
     # Shell aliases
     && mkdir -p /root/.config/fish \
     && cat <<'EOF' >> /root/.config/fish/config.fish
