@@ -65,6 +65,8 @@ EOF
 
 # Kubectl
 COPY --from=kubectl /opt/bitnami/kubectl/bin/kubectl /usr/bin/kubectl
+# Fish variables
+COPY fish_variables /root/.config/fish/fish_variables
 
 ENV SHELL=/usr/bin/fish
 SHELL ["/usr/bin/fish", "-c"]
