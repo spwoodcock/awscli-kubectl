@@ -13,6 +13,7 @@ RUN apt-get update --quiet \
         "jq" \
         "ca-certificates" \
         "fish" \
+        "git" \
     && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates \
     # AWS CLI
