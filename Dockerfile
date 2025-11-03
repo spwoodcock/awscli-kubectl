@@ -8,6 +8,7 @@ RUN apt-get update --quiet \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --quiet --no-install-recommends \
         "curl" \
+        "nano" \
         "unzip" \
         "less" \
         "jq" \
