@@ -52,6 +52,13 @@ RUN apt-get update --quiet \
     && chmod +x "velero-v${VELERO_VERSION}-linux-amd64/velero" \
     && mv "velero-v${VELERO_VERSION}-linux-amd64/velero" /usr/local/bin/ \
     && rm -rf velero.tar.gz "velero-v${VELERO_VERSION}-linux-amd64" \
+    # Argo workflow CLI
+    && ARGO_CLI_VERSION=3.7.3 \
+    && curl -sLO "https://github.com/argoproj/argo-workflows/releases/download/v${ARGO_CLI_VERSION}/argo-linux-amd64.gz" \
+    && gunzip argo-linux-amd64.gz \
+    && chmod +x argo-linux-amd64 \
+    && mv ./argo-linux-amd64 /usr/local/bin/argo \
+    && rm -rf argo-linux-amd64.gz \
     # Shell aliases
     && mkdir -p /root/.config/fish \
     && cat <<'EOF' >> /root/.config/fish/config.fish
